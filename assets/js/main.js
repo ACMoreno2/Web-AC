@@ -17,6 +17,12 @@
     toggle.classList.remove('is-open');
     toggle.setAttribute('aria-expanded', 'false');
     toggle.setAttribute('aria-label', 'Abrir menú');
+    var sub = document.querySelector('.nav__item--has-sub');
+    if (sub) {
+      sub.classList.remove('is-open');
+      var b = sub.querySelector('.subnav__toggle');
+      if (b) b.setAttribute('aria-expanded', 'false');
+    }
   }
 
   if (toggle && nav) {
@@ -29,7 +35,7 @@
 
     // Cerrar al pulsar un enlace o la tecla Escape
     nav.addEventListener('click', function (e) {
-      if (e.target.closest('a')) closeNav();
+      if (e.target.closest('a')) closeNav();   // los enlaces navegan; el botón del desplegable no cierra
     });
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') closeNav();
@@ -46,23 +52,18 @@
     onScroll();
   }
 
-  /* ---------- Enlace activo según la sección visible ---------- */
-  var links = Array.prototype.slice.call(document.querySelectorAll('.nav__link[href^="#"]'));
-  var sections = links
-    .map(function (link) { return document.querySelector(link.getAttribute('href')); })
-    .filter(Boolean);
+  /* ---------- Desplegable de Servicios en el menú móvil ---------- */
+  /* En escritorio se abre con el ratón o el teclado (CSS); en táctil no hay
+     hover, así que el botón lo despliega. */
+  var subToggle = document.querySelector('.subnav__toggle');
+  var subItem = subToggle && subToggle.closest('.nav__item--has-sub');
 
-  if ('IntersectionObserver' in window && sections.length) {
-    var spy = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        links.forEach(function (link) {
-          link.classList.toggle('is-active', link.getAttribute('href') === '#' + entry.target.id);
-        });
-      });
-    }, { rootMargin: '-45% 0px -50% 0px' });
-
-    sections.forEach(function (section) { spy.observe(section); });
+  if (subToggle && subItem) {
+    subToggle.addEventListener('click', function () {
+      var abierto = subItem.classList.toggle('is-open');
+      subToggle.setAttribute('aria-expanded', String(abierto));
+      subToggle.setAttribute('aria-label', abierto ? 'Ocultar servicios' : 'Mostrar servicios');
+    });
   }
 
   /* ---------- Aparición de elementos al hacer scroll ---------- */

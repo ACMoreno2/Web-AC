@@ -8,18 +8,39 @@ El contenido procede del brochure corporativo *SOLUCIONES LOGÍSTICAS INTEGRALES
 
 ## Estructura
 
+Sitio de 10 páginas. Cada entrada del menú es una página propia y cada servicio
+tiene la suya.
+
 ```
-index.html              Todo el contenido de la página
+index.html                             Inicio
+servicios.html                         Índice de servicios
+servicio-agenciamiento-de-aduanas.html
+servicio-transporte-terrestre.html
+servicio-carga-proyecto-imo.html
+servicio-almacenaje-y-maniobras.html
+nosotros.html                          Quiénes somos
+por-que-elegirnos.html
+preguntas-frecuentes.html
+contacto.html
+
 assets/css/styles.css   Estilos: paleta, tipografía, responsive, modo oscuro
 assets/css/fonts.css    Declaraciones de las tipografías autoalojadas
 assets/fonts/           League Spartan, Montserrat y DM Sans (.woff2)
-assets/img/             Logotipo, isotipo, favicons e imagen para redes
-assets/js/main.js       Menú móvil, acordeón, contador, validación del formulario
+assets/img/             Logotipo, iconos y fotografías
+assets/js/main.js       Menú, desplegable, acordeón, contador y formulario
 .github/workflows/      Despliegue automático en GitHub Pages
 ```
 
-Secciones: Inicio · Servicios · Nosotros · Por qué elegirnos · Preguntas
-frecuentes · Contacto.
+### La cabecera y el pie están repetidos en cada archivo
+
+No hay sistema de plantillas, para que puedas editar cualquier página desde el
+navegador sin instalar nada. La contrapartida: **si cambias el menú, el pie o la
+franja de llamada a la acción, hay que tocarlo en las 10 páginas**. Busca los
+comentarios `CABECERA` y `PIE` para localizarlos.
+
+Las fotografías se extrajeron del brochure corporativo. Están optimizadas para
+web (máximo 1600 px de ancho, JPEG progresivo) y se cargan de forma diferida
+salvo la primera, que es la que se ve al entrar.
 
 ## Cómo verla en tu ordenador
 
