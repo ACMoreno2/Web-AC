@@ -134,6 +134,62 @@ Para activarlo, una sola vez:
 La primera ejecución tarda un par de minutos. Quedará en
 `https://acmoreno2.github.io/Web-AC/`.
 
+## Libro de Reclamaciones
+
+La página `libro-de-reclamaciones.html` reproduce la Hoja de Reclamación que exige
+el Código de Protección y Defensa del Consumidor. El enlace está en el pie de las
+once páginas.
+
+### Falta un paso para que sea válido
+
+La norma obliga a **entregar copia de la hoja al consumidor** y a **conservar el
+registro**. Un sitio estático no puede hacer ninguna de las dos cosas: hoy el
+formulario abre el gestor de correo del visitante, y si esa persona no llega a
+enviarlo, la reclamación se pierde y no queda constancia.
+
+Para resolverlo hay que enrutar el envío por un servicio de formularios
+(Web3Forms y Formspree tienen plan gratuito y ambos permiten respuesta
+automática al consumidor):
+
+1. Crea la cuenta y copia el endpoint o la clave de acceso.
+2. En `assets/js/main.js`, pega el valor en `LIBRO_ENDPOINT`.
+3. Configura en el servicio la respuesta automática al correo del consumidor,
+   con el contenido de la hoja.
+
+Las reclamaciones llegan a `administracion@ac-moreno.com`, definido en
+`LIBRO_DESTINO` en el mismo archivo.
+
+**Mientras `LIBRO_ENDPOINT` esté vacío, la página no debería publicarse como
+Libro de Reclamaciones oficial.**
+
+### Flujo de atención
+
+Quien gestione el buzón debe seguir estos pasos:
+
+| # | Paso | Plazo |
+| --- | --- | --- |
+| 1 | Poner el Libro a disposición de inmediato. **No condicionar la atención al pago previo** del servicio reclamado | Inmediato |
+| 2 | Registrar el reclamo o queja | Al recibirlo |
+| 3 | Evaluar el caso | — |
+| 4 | Elaborar la respuesta por escrito, física o electrónica | — |
+| 5 | Emitir la respuesta | **15 días hábiles improrrogables** |
+| 6 | Si se envía una propuesta de solución, hacerlo por un medio que deje constancia | — |
+| 7 | Al enviarla, **el cómputo del plazo queda suspendido** | — |
+| 8 | Esperar el pronunciamiento del consumidor | **5 días hábiles** |
+| 9 | Si acepta: formalizar el acuerdo en la misma Hoja, dejando constancia expresa | — |
+| 10 | Si rechaza o no responde: continuar la atención y emitir la respuesta | — |
+| 11 | Si no queda conforme, puede recurrir a solución de controversias o denunciar ante INDECOPI | — |
+| 12 | Cierre y archivo, dejando constancia de la respuesta, el acuerdo y la documentación | — |
+
+El plazo del paso 5 es **improrrogable**: pasarlo expone a la empresa a sanción.
+Conviene llevar el control de vencimientos fuera del correo.
+
+### Pendiente de validación legal
+
+La estructura del formulario, los textos y este flujo deben ser revisados por
+asesoría legal antes de publicar. Recogen la norma general, no un asesoramiento
+sobre el caso concreto de la empresa.
+
 ## Conectar el dominio ac-moreno.com (comprado en GoDaddy)
 
 El dominio ya tiene una landing básica de GoDaddy. Hay que **quitar esa conexión
