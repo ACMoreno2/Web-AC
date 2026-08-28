@@ -138,7 +138,7 @@
   var status = document.getElementById('formStatus');
 
   // ==== EDITAR: dirección donde quieres recibir las solicitudes ====
-  var DESTINO = 'contacto@acmorenologistics.com';
+  var DESTINO = 'administracion@ac-moreno.com';
 
   function setError(field, message) {
     var box = document.querySelector('[data-error-for="' + field.name + '"]');
