@@ -142,7 +142,10 @@
   var DESTINO = 'administracion@ac-moreno.com';
 
   function setError(field, message) {
-    var box = document.querySelector('[data-error-for="' + field.name + '"]');
+    /* Se busca dentro del propio formulario, no en todo el documento: dos
+       formularios de la web comparten nombres de campo (nombre, email…). */
+    var ambito = field.form || document;
+    var box = ambito.querySelector('[data-error-for="' + field.name + '"]');
     if (box) box.textContent = message || '';
     if (message) {
       field.setAttribute('aria-invalid', 'true');
