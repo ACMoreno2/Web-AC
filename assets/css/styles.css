@@ -409,9 +409,9 @@ mark {
   width: 52px; height: 52px;
   margin-bottom: 18px;
   border-radius: 14px;
-  background: var(--gold-soft);
-  border: 1.5px solid var(--gold);
-  color: var(--navy);
+  background: var(--navy);
+  border: 1.5px solid var(--navy);
+  color: var(--gold);
 }
 .card__icon svg { width: 26px; height: 26px; }
 .card__title { font-size: 1.3rem; font-weight: 700; }
@@ -1249,7 +1249,8 @@ mark {
   .nav__link--cta.is-current { background: var(--gold); color: var(--navy); }
   .highlight { background: #10161F; }
   .cta-band { background: #141B26; }
-  .benefit__icon { background: var(--gold); color: var(--navy); }
+  .benefit__icon,
+  .card__icon { background: var(--gold); border-color: var(--gold); color: var(--navy); }
   .nav__link--cta:hover, .nav__link--cta.is-active { background: var(--btn-hover); color: var(--navy); }
   .nav__link.is-active { color: var(--gold); background: var(--gold-soft); }
   .btn--ghost { color: var(--ink); }
