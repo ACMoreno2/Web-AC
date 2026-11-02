@@ -377,31 +377,39 @@
     });
   }
 
-  /* ---------- Botón flotante de WhatsApp, con dos líneas ---------- */
-  var waToggle = document.getElementById('waToggle');
-  var waOpciones = document.getElementById('waOpciones');
+  /* ---------- Reparto de las dos líneas comerciales de WhatsApp ----------
+     Las dos líneas atiende el mismo equipo, así que al visitante no le aporta
+     elegir: el enlace apunta a una u otra sin que lo note.
 
-  if (waToggle && waOpciones) {
-    var cerrarWa = function () {
-      waOpciones.hidden = true;
-      waToggle.setAttribute('aria-expanded', 'false');
-    };
+     El número se sortea UNA vez por visitante y se guarda: así el reparto
+     queda repartido entre las dos líneas, pero quien vuelve escribe siempre
+     a la misma persona y no tiene que explicar su caso dos veces.
 
-    waToggle.addEventListener('click', function (e) {
-      e.stopPropagation();
-      var abierto = waOpciones.hidden;
-      waOpciones.hidden = !abierto;
-      waToggle.setAttribute('aria-expanded', String(abierto));
-    });
+     Sin almacenamiento disponible (ventana privada) se sortea en cada visita,
+     que sigue repartiendo bien. Quien tenga el JavaScript desactivado se queda
+     con el número que trae el HTML.
 
-    /* Se cierra al pulsar fuera o con Escape */
-    document.addEventListener('click', function (e) {
-      if (!e.target.closest('#waFloat')) cerrarWa();
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') cerrarWa();
-    });
+     Los enlaces marcados .wa-fijo no se tocan: en Contacto los dos números
+     aparecen a propósito para que el visitante escoja.                      */
+  var LINEAS = ['51997514680', '51989219244'];
+  var CLAVE_LINEA = 'ac-linea-comercial';
+
+  function lineaAsignada() {
+    var guardada;
+    try { guardada = localStorage.getItem(CLAVE_LINEA); } catch (e) { guardada = null; }
+
+    if (LINEAS.indexOf(guardada) !== -1) return guardada;
+
+    var elegida = LINEAS[Math.floor(Math.random() * LINEAS.length)];
+    try { localStorage.setItem(CLAVE_LINEA, elegida); } catch (e) { /* ventana privada */ }
+    return elegida;
   }
+
+  var linea = lineaAsignada();
+  document.querySelectorAll('a[href*="wa.me/"]').forEach(function (a) {
+    if (a.classList.contains('wa-fijo')) return;
+    a.href = a.getAttribute('href').replace(/wa\.me\/\d+/, 'wa.me/' + linea);
+  });
 
   /* ---------- Año actual en el pie ---------- */
   var year = document.getElementById('year');

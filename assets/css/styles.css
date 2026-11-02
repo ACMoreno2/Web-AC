@@ -974,26 +974,23 @@ video.portada__media { animation: none; }
   position: fixed;
   right: 20px; bottom: 20px;
   z-index: 90;
-  display: grid;
-  justify-items: end;
-  gap: 10px;
-}
-.wa-float__btn {
   display: inline-flex;
   align-items: center;
   gap: 0;
   padding: 15px;
-  border: 0;
   border-radius: 999px;
   background: #25D366;
   color: #FFFFFF;
   box-shadow: 0 8px 24px -6px rgba(16, 22, 31, .45);
-  cursor: pointer;
   transition: gap .25s ease, padding .25s ease, transform .2s ease;
 }
-.wa-float__btn:hover,
-.wa-float__btn:focus-visible { transform: translateY(-2px); gap: 10px; padding-inline: 20px 22px; }
-.wa-float__btn svg { width: 28px; height: 28px; flex: none; }
+.wa-float:hover, .wa-float:focus-visible {
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  gap: 10px;
+  padding-inline: 20px 22px;
+}
+.wa-float svg { width: 28px; height: 28px; flex: none; }
 .wa-float__label {
   max-width: 0;
   overflow: hidden;
@@ -1003,37 +1000,8 @@ video.portada__media { animation: none; }
   font-weight: 600;
   transition: max-width .25s ease;
 }
-.wa-float__btn:hover .wa-float__label,
-.wa-float__btn:focus-visible .wa-float__label { max-width: 240px; }
-/* Con el desplegable abierto la etiqueta sobra: ya se ven los números */
-.wa-float__btn[aria-expanded="true"] .wa-float__label { max-width: 0; }
-
-.wa-float__opciones {
-  display: grid;
-  gap: 2px;
-  padding: 6px;
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-lg);
-}
-.wa-float__opciones[hidden] { display: none; }
-.wa-float__opciones a {
-  display: grid;
-  gap: 1px;
-  padding: 9px 16px;
-  border-radius: 9px;
-  text-align: right;
-}
-.wa-float__opciones a:hover { background: var(--green-soft); }
-.wa-float__opciones strong {
-  font-family: var(--font-ui);
-  font-size: .95rem;
-  font-weight: 700;
-  color: var(--ink);
-  font-variant-numeric: tabular-nums;
-}
-.wa-float__opciones span { font-size: .74rem; color: var(--text-soft); }
+.wa-float:hover .wa-float__label,
+.wa-float:focus-visible .wa-float__label { max-width: 240px; }
 
 /* ---------- Enlaces legales del pie ---------- */
 .footer__legal { display: flex; flex-wrap: wrap; gap: 8px 20px; }
@@ -1271,9 +1239,8 @@ video.portada__media { animation: none; }
   .brand__name strong { font-size: 1.05rem; }
   .benefit { flex-direction: column; gap: 14px; }
   .servicio__lado { grid-template-columns: 1fr; }
-  .wa-float { right: 14px; bottom: 14px; }
-  .wa-float__btn { padding: 13px; }
-  .wa-float__btn svg { width: 25px; height: 25px; }
+  .wa-float { right: 14px; bottom: 14px; padding: 13px; }
+  .wa-float svg { width: 25px; height: 25px; }
   .footer__bottom { flex-direction: column; align-items: flex-start; }
 }
 
@@ -1339,8 +1306,6 @@ video.portada__media { animation: none; }
     border-color: var(--gold); box-shadow: 0 0 0 4px rgba(247, 210, 109, .16);
   }
   .whatsapp:hover { background: rgba(85, 171, 128, .26); }
-  .wa-float__opciones { background: var(--bg-alt); }
-  .wa-float__opciones a:hover { background: #243044; }
   a:hover { color: var(--white); }
   /* Sobre fondo oscuro el bloque amarillo ensucia el texto blanco:
      se cambia por un subrayado fino del mismo dorado. */
