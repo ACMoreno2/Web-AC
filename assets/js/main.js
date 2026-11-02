@@ -377,6 +377,32 @@
     });
   }
 
+  /* ---------- Botón flotante de WhatsApp, con dos líneas ---------- */
+  var waToggle = document.getElementById('waToggle');
+  var waOpciones = document.getElementById('waOpciones');
+
+  if (waToggle && waOpciones) {
+    var cerrarWa = function () {
+      waOpciones.hidden = true;
+      waToggle.setAttribute('aria-expanded', 'false');
+    };
+
+    waToggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var abierto = waOpciones.hidden;
+      waOpciones.hidden = !abierto;
+      waToggle.setAttribute('aria-expanded', String(abierto));
+    });
+
+    /* Se cierra al pulsar fuera o con Escape */
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('#waFloat')) cerrarWa();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') cerrarWa();
+    });
+  }
+
   /* ---------- Año actual en el pie ---------- */
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
