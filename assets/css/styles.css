@@ -281,6 +281,18 @@ mark {
   z-index: -3;
   width: 100%; height: 100%;
   object-fit: cover;
+  /* Travelling lento sobre la fotografía: da sensación de movimiento sin el
+     peso de un vídeo. Cuando haya .mp4 este bloque deja de aplicarse, porque
+     el vídeo trae el suyo propio. */
+  transform-origin: 62% 55%;
+  animation: travelling 28s ease-in-out infinite alternate;
+  will-change: transform;
+}
+video.portada__media { animation: none; }
+
+@keyframes travelling {
+  from { transform: scale(1.02) translate3d(0, 0, 0); }
+  to   { transform: scale(1.12) translate3d(-1.2%, -1%, 0); }
 }
 /* Velo doble: sin él el texto blanco no se sostiene sobre la foto */
 .portada::after {
@@ -1230,6 +1242,7 @@ mark {
 /* ---------- Accesibilidad: menos movimiento ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .portada__media { animation: none; transform: none; }
   *, *::before, *::after {
     animation-duration: .001ms !important;
     animation-iteration-count: 1 !important;
